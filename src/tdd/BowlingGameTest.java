@@ -38,9 +38,7 @@ public class BowlingGameTest {
 
 	@Test
 	void testTooManyRolls() {
-		for (int i = 0; i < BowlingGameConfig.MAX_THROW_NUMBER; i++) {
-			g.roll(0);
-		}
+		rollMany(BowlingGameConfig.MAX_THROW_NUMBER, 0);
 
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> g.roll(0));
 	}
