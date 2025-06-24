@@ -50,6 +50,12 @@ public class BowlingGameTest {
 		assertThrows(IllegalArgumentException.class, () -> g.roll(BowlingGameConfig.MAX_PIN_COUNT + 1));
 	}
 
+	@Test
+	void testTooManyRollsAfterOnlyStrikes() {
+		rollMany(12, 10);
+		assertThrows(TooManyRollsException.class, () -> g.roll(0));
+	}
+
 	private void rollStrike() {
 		g.roll(10);
 	}

@@ -6,7 +6,7 @@ public class Game {
 	private int currentRoll;
 
 	public void roll(int pins) {
-		if (currentRoll + 1 > BowlingGameConfig.MAX_THROW_NUMBER) {
+		if (!isRollAllowed() || currentRoll >= 21) {
 			throw new TooManyRollsException();
 		}
 
@@ -34,6 +34,31 @@ public class Game {
 		}
 
 		return score;
+	}
+
+	private boolean isRollAllowed() {
+		int frameCounter = 0;
+		int rollCounter = 0;
+
+		for (; frameCounter < 10 && rollCounter < currentRoll; frameCounter++) {
+			if (rolls[rollCounter] == 10) {
+				rollCounter += 1;
+			} else {
+				rollCounter += 2;
+			}
+		}
+
+		if (frameCounter < 10) {
+			return true;
+		}
+
+		int extraRolls = currentRoll - rollCounter;
+
+		if (rolls[rollCounter - 2] + rolls[rollCounter - 1] >= 10) {
+			return extraRolls < 2;
+		} else {
+			return extraRolls < 1;
+		}
 	}
 
 	private int strikeBonus(int rollCounter) {
