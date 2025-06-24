@@ -60,9 +60,15 @@ public class BowlingGameTest {
 
 	@Test
 	void testTooManyRollsAfterOnlySpares() {
-		rollMany(20, 5);
+		rollManySpares(10);
 		g.roll(10);
 		assertThrows(TooManyRollsException.class, () -> g.roll(0));
+	}
+
+	private void rollManySpares(int rolls) {
+		for (int i = 0; i < rolls; i++) {
+			rollSpare();
+		}
 	}
 
 	private void rollManyStrikes(int rolls) {
@@ -72,7 +78,7 @@ public class BowlingGameTest {
 	}
 
 	private void rollStrike() {
-		g.roll(10);
+		g.roll(BowlingGameConfig.MAX_PIN_COUNT);
 	}
 
 	private void rollSpare() {
