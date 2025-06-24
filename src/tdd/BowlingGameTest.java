@@ -58,6 +58,13 @@ public class BowlingGameTest {
 		assertThrows(TooManyRollsException.class, () -> g.roll(0));
 	}
 
+	@Test
+	void testTooManyRollsAfterOnlySpares() {
+		rollMany(20, 5);
+		g.roll(10);
+		assertThrows(TooManyRollsException.class, () -> g.roll(0));
+	}
+
 	private void rollManyStrikes(int rolls) {
 		for (int i = 0; i < rolls; i++) {
 			rollStrike();
