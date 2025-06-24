@@ -1,5 +1,6 @@
 package tdd;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +34,20 @@ public class BowlingGameTest {
 		g.roll(5);
 
 		assertEquals(18, g.score());
+	}
+
+	@Test
+	void testTooManyRolls() {
+		rollMany(BowlingGameConfig.MAX_THROW_NUMBER, 0);
+
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> g.roll(0));
+	}
+
+	@Test
+	void testRollMoreThanTenPins() {
+		Game g = new Game();
+
+		assertThrows(IllegalArgumentException.class, () -> g.roll(BowlingGameConfig.MAX_PIN_COUNT + 1));
 	}
 
 	private void rollStrike() {
