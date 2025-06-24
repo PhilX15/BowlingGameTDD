@@ -50,8 +50,35 @@ public class BowlingGameTest {
 		assertThrows(IllegalArgumentException.class, () -> g.roll(BowlingGameConfig.MAX_PIN_COUNT + 1));
 	}
 
-	private void rollStrike() {
+	@Test
+	void testTooManyRollsAfterOnlyStrikes() {
+		rollManyStrikes(BowlingGameConfig.MAX_FRAME_NUMBER);
 		g.roll(10);
+		g.roll(10);
+		assertThrows(TooManyRollsException.class, () -> g.roll(0));
+	}
+
+	@Test
+	void testTooManyRollsAfterOnlySpares() {
+		rollManySpares(10);
+		g.roll(10);
+		assertThrows(TooManyRollsException.class, () -> g.roll(0));
+	}
+
+	private void rollManySpares(int rolls) {
+		for (int i = 0; i < rolls; i++) {
+			rollSpare();
+		}
+	}
+
+	private void rollManyStrikes(int rolls) {
+		for (int i = 0; i < rolls; i++) {
+			rollStrike();
+		}
+	}
+
+	private void rollStrike() {
+		g.roll(BowlingGameConfig.MAX_PIN_COUNT);
 	}
 
 	private void rollSpare() {
