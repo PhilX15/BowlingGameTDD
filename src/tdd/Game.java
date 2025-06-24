@@ -6,6 +6,10 @@ public class Game {
 	private int currentRoll;
 
 	public void roll(int pins) {
+		if (currentRoll + 1 > BowlingGameConfig.MAX_THROW_NUMBER) {
+			throw new TooManyRollsException();
+		}
+
 		if (pins < 0 || pins > BowlingGameConfig.MAX_PIN_COUNT) {
 			throw new IllegalArgumentException("Invalid number of pins");
 		}

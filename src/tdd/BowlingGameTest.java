@@ -40,7 +40,7 @@ public class BowlingGameTest {
 	void testTooManyRolls() {
 		rollMany(BowlingGameConfig.MAX_THROW_NUMBER, 0);
 
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> g.roll(0));
+		assertThrows(TooManyRollsException.class, () -> g.roll(0));
 	}
 
 	@Test
