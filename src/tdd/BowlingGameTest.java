@@ -52,8 +52,16 @@ public class BowlingGameTest {
 
 	@Test
 	void testTooManyRollsAfterOnlyStrikes() {
-		rollMany(12, 10);
+		rollManyStrikes(BowlingGameConfig.MAX_FRAME_NUMBER);
+		g.roll(10);
+		g.roll(10);
 		assertThrows(TooManyRollsException.class, () -> g.roll(0));
+	}
+
+	private void rollManyStrikes(int rolls) {
+		for (int i = 0; i < rolls; i++) {
+			rollStrike();
+		}
 	}
 
 	private void rollStrike() {
