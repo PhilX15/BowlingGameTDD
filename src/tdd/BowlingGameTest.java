@@ -16,7 +16,7 @@ public class BowlingGameTest {
 
 	@Test
 	void testSpareInTheLastFrame() {
-		rollMany(18, 0);
+		rollMany(BowlingGameConfig.MAX_THROW_NUMBER - 3, 0);
 
 		rollSpare();
 		g.roll(3);
@@ -26,7 +26,7 @@ public class BowlingGameTest {
 
 	@Test
 	void testStrikeInTheLastFrame() {
-		rollMany(18, 0);
+		rollMany(BowlingGameConfig.MAX_THROW_NUMBER - 3, 0);
 
 		rollStrike();
 		g.roll(3);

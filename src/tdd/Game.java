@@ -2,7 +2,7 @@ package tdd;
 
 public class Game {
 
-	private int[] rolls = new int[21];
+	private int[] rolls = new int[BowlingGameConfig.MAX_THROW_NUMBER];
 	private int currentRoll;
 
 	public void roll(int pins) {
@@ -12,7 +12,7 @@ public class Game {
 	public int score() {
 		int score = 0;
 		int rollCounter = 0;
-		for (int frame = 0; frame < 10; frame++) {
+		for (int frame = 0; frame < BowlingGameConfig.MAX_FRAME_NUMBER; frame++) {
 			if (isStrike(rollCounter)) {
 				score += strikeBonus(rollCounter);
 				rollCounter++;
@@ -29,11 +29,11 @@ public class Game {
 	}
 
 	private int strikeBonus(int rollCounter) {
-		return 10 + rolls[rollCounter + 1] + rolls[rollCounter + 2];
+		return BowlingGameConfig.MAX_PIN_COUNT + rolls[rollCounter + 1] + rolls[rollCounter + 2];
 	}
 
 	private boolean isStrike(int rollCounter) {
-		return rolls[rollCounter] == 10;
+		return rolls[rollCounter] == BowlingGameConfig.MAX_PIN_COUNT;
 	}
 
 	private int frameScore(int rollCounter) {
@@ -41,10 +41,10 @@ public class Game {
 	}
 
 	private int spareBonus(int rollCounter) {
-		return 10 + rolls[rollCounter + 2];
+		return BowlingGameConfig.MAX_PIN_COUNT + rolls[rollCounter + 2];
 	}
 
 	private boolean isSpare(int rollCounter) {
-		return frameScore(rollCounter) == 10;
+		return frameScore(rollCounter) == BowlingGameConfig.MAX_PIN_COUNT;
 	}
 }
