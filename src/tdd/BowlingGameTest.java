@@ -47,7 +47,7 @@ public class BowlingGameTest {
 	void testRollMoreThanTenPins() {
 		Game g = new Game();
 
-		assertThrows(IllegalArgumentException.class, () -> g.roll(11));
+		assertThrows(IllegalArgumentException.class, () -> g.roll(BowlingGameConfig.MAX_PIN_COUNT + 1));
 	}
 
 	private void rollStrike() {
