@@ -43,6 +43,13 @@ public class BowlingGameTest {
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> g.roll(0));
 	}
 
+	@Test
+	void testRollMoreThanTenPins() {
+		Game g = new Game();
+
+		assertThrows(IllegalArgumentException.class, () -> g.roll(11));
+	}
+
 	private void rollStrike() {
 		g.roll(10);
 	}
